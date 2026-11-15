@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a11">
+<title>RG GAMER BOY FF — Admin Control Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#080a11;--panel:#111725;--panel2:#0b101b;--line:#283249;--text:#f3f6ff;--muted:#8f9ab2;--red:#ff365d;--green:#43dfad}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 5% 0%,#281020 0,transparent 32%),radial-gradient(ellipse at 100% 100%,#101c3b 0,transparent 35%),var(--bg);font-family:Inter,system-ui,sans-serif;color:var(--text);min-height:100vh}
+header{position:sticky;top:0;z-index:4;background:#090d16eF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:16px clamp(16px,4vw,42px);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:900;letter-spacing:.04em}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em;margin-top:4px}.topright{color:#aab5cc;font-size:11px;border:1px solid var(--line);border-radius:30px;padding:9px 12px}
+.layout{width:min(1200px,calc(100% - 28px));margin:24px auto 60px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px}
+nav,.panel{background:linear-gradient(150deg,#141b2a,#0d121e);border:1px solid var(--line);border-radius:18px}
+nav{padding:12px;height:max-content;position:sticky;top:82px}nav button{display:block;width:100%;text-align:left;background:transparent;border:0;color:#aeb8ce;padding:13px 12px;border-radius:10px;font:700 12px Inter;cursor:pointer}nav button.active,nav button:hover{background:#242b3d;color:white}
+main{min-width:0}.heading{margin:4px 0 18px}.heading h1{font-size:clamp(24px,4vw,34px);margin:0 0 8px;letter-spacing:-.04em}.heading p{color:var(--muted);font-size:12px;line-height:1.6;margin:0}
+.panel{padding:clamp(16px,3vw,26px);margin-bottom:16px}.panel h2{font-size:16px;margin:0 0 6px}.sub{color:var(--muted);font-size:11px;line-height:1.6;margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{min-width:0}.field.full{grid-column:1/-1}.field label{display:block;color:#dce3f3;font-size:11px;font-weight:800;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;background:#090e18;color:white;border:1px solid #303a52;border-radius:10px;padding:12px;font:500 12px Inter;outline:none}.field textarea{min-height:90px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#d94b70;box-shadow:0 0 0 3px #ff365d18}.colorrow{display:flex;align-items:center;gap:10px}.colorrow input[type=color]{width:52px;height:40px;padding:3px}.colorrow input[type=text]{flex:1}.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;background:#0a101b;border:1px solid #273149;border-radius:11px;font-size:12px;font-weight:700}.toggle input{accent-color:#ff365d;width:18px;height:18px}
+.btn{border:0;border-radius:11px;padding:13px 16px;font:900 11px Inter;letter-spacing:.04em;cursor:pointer}.primary{background:linear-gradient(100deg,#ff365d,#e7478d);color:white}.secondary{background:#1a2232;color:#e3e9f7;border:1px solid #35405a}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.status{font-size:11px;color:#9aa8c0;margin-top:12px;min-height:18px}.releasebox{border:1px solid #38425a;background:#0a101b;border-radius:14px;padding:16px;margin-top:12px}.preview{border:1px dashed #3a4660;border-radius:14px;padding:16px;margin-top:15px;background:#0a0f19}.preview strong{display:block;font-size:18px;margin-bottom:6px}.preview span{color:var(--muted);font-size:11px}.hidden{display:none!important}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.layout nav{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}header{padding:14px}.topright{font-size:10px}}
+</style>
+</head>
+<body>
+<header><div class="brand">RG GAMER BOY FF<small>ADMIN CONTROL CENTER</small></div><div class="topright">WEBSITE MANAGEMENT</div></header>
+<div class="layout">
+<nav aria-label="Admin sections">
+<button class="active" data-tab="dashboard">◈ Dashboard</button>
+<button data-tab="texts">✎ Text Manager</button>
+<button data-tab="colors">◉ Color Manager</button>
+<button data-tab="features">☷ Feature Manager</button>
+<button data-tab="release">↗ Update & Release</button>
+<button data-tab="history">◷ Release History</button>
+</nav>
+<main>
+<div class="heading"><h1 id="sectionTitle">Dashboard</h1><p>Customize the RG GAMER BOY FF website and publish its update information.</p></div>
+
+<section class="tabpage" id="page-dashboard">
+<div class="panel"><h2>Website Control Center</h2><p class="sub">The panel opens directly without an additional password screen, as requested. Your separate authorization process is not included in this file.</p>
+<div class="grid">
+<div class="releasebox"><span class="sub">CONNECTED DATABASE</span><h2>Firebase Realtime Database</h2><p class="sub">Project: rg-gamer-boy-ff-website-system</p></div>
+<div class="releasebox"><span class="sub">CURRENT RELEASE</span><h2 id="dashVersion">Not loaded</h2><p class="sub" id="dashSize">No release size</p></div>
+</div><div class="status" id="connectionStatus">Connecting to Firebase…</div></div>
+</section>
+
+<section class="tabpage hidden" id="page-texts">
+<div class="panel"><h2>Text Manager</h2><p class="sub">Edit the text currently supported by the main website.</p>
+<div class="grid">
+<div class="field"><label>Hero small heading</label><input id="eyebrow" value="MEMBERS AREA"></div>
+<div class="field"><label>Form small heading</label><input id="formMini" value="WELCOME TO THE PORTAL"></div>
+<div class="field"><label>Main title — line 1</label><input id="titleLine1" value="Your game."></div>
+<div class="field"><label>Main title — line 2</label><input id="titleLine2" value="Your access."></div>
+<div class="field"><label>Main title — accent line</label><input id="titleAccent" value="Your world."></div>
+<div class="field full"><label>Hero description</label><textarea id="description">Create an account or continue as a guest. A clean, fast access experience built for the RG GAMER BOY FF community.</textarea></div>
+<div class="field full"><label>Account form description</label><input id="formSubtitle" value="Choose a username and password. No email required."></div>
+</div><div class="actions"><button class="btn primary" id="saveTexts">SAVE TEXT SETTINGS</button></div>
+</div></section>
+
+<section class="tabpage hidden" id="page-colors">
+<div class="panel"><h2>Color Manager</h2><p class="sub">Change the main theme colors. Enter a six-digit HEX color or use the picker.</p>
+<div class="grid">
+<div class="field"><label>Primary color</label><div class="colorrow"><input type="color" id="primaryPicker" value="#ff365d"><input id="primary" value="#ff365d"></div></div>
+<div class="field"><label>Accent color</label><div class="colorrow"><input type="color" id="accentPicker" value="#ff5e8a"><input id="accent" value="#ff5e8a"></div></div>
+<div class="field"><label>Background color</label><div class="colorrow"><input type="color" id="backgroundPicker" value="#080a11"><input id="background" value="#080a11"></div></div>
+<div class="field"><label>Main text color</label><div class="colorrow"><input type="color" id="textPicker" value="#f4f6ff"><input id="text" value="#f4f6ff"></div></div>
+<div class="field"><label>Muted text color</label><div class="colorrow"><input type="color" id="mutedPicker" value="#929bb2"><input id="muted" value="#929bb2"></div></div>
+</div><div class="actions"><button class="btn primary" id="saveColors">SAVE COLOR SETTINGS</button></div></div>
+</section>
+
+<section class="tabpage hidden" id="page-features">
+<div class="panel"><h2>Feature Manager</h2><p class="sub">Show or hide the supported feature rows on the main website.</p>
+<div class="grid">
+<label class="toggle">Simple account setup <input type="checkbox" id="featureAccountSetup" checked></label>
+<label class="toggle">Access-key verification <input type="checkbox" id="featureAccessKey" checked></label>
+<label class="toggle">Guest access available <input type="checkbox" id="featureGuestAccess" checked></label>
+</div><div class="actions"><button class="btn primary" id="saveFeatures">SAVE FEATURE SETTINGS</button></div></div>
+</section>
+
+<section class="tabpage hidden" id="page-release">
+<div class="panel"><h2>Update & Release Manager</h2><p class="sub">Customize first, then publish. Release size is a display label only; it does not represent an actual downloadable package.</p>
+<div class="grid">
+<div class="field"><label>Version</label><input id="version" placeholder="e.g. 2.19.0" value="2.19.0"></div>
+<div class="field"><label>Update size (MB) — shown to users</label><input id="sizeMb" type="number" min="0" max="99999" step="0.1" placeholder="e.g. 5"></div>
+<div class="field full"><label>What's new?</label><textarea id="notes" placeholder="Write the update notes shown to users…"></textarea></div>
+</div>
+<div class="preview"><strong id="previewVersion">Version 2.19.0</strong><span id="previewSize">Update size will appear here</span><p id="previewNotes" class="sub">Your update notes preview.</p></div>
+<div class="actions"><button class="btn primary" id="publishRelease">SAVE & RELEASE</button></div>
+<div class="status" id="releaseStatus"></div>
+</div></section>
+
+<section class="tabpage hidden" id="page-history">
+<div class="panel"><h2>Release History</h2><p class="sub">Previously published releases.</p><div id="historyList" class="sub">Loading release history…</div></div>
+</section>
+</main>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import { getDatabase, ref, get, set, update, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAQc3Nefy1-4ndquvJAH6uFoZE9jw3eCa",
+  authDomain: "rg-gamer-boy-ff-website-system.firebaseapp.com",
+  databaseURL: "https://rg-gamer-boy-ff-website-system-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "rg-gamer-boy-ff-website-system",
+  storageBucket: "rg-gamer-boy-ff-website-system.firebasestorage.app",
+  messagingSenderId: "705401797172",
+  appId: "1:705401797172:web:8afbfa27cef04889546861",
+  measurementId: "G-QJQJY6ZQYF"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const $ = id => document.getElementById(id);
+const status = (id, text, error=false) => { $(id).textContent=text; $(id).style.color=error?'#ff9bac':'#43dfad'; };
+
+const titles = {dashboard:'Dashboard',texts:'Text Manager',colors:'Color Manager',features:'Feature Manager',release:'Update & Release',history:'Release History'};
+document.querySelectorAll('nav button').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b===button));
+  document.querySelectorAll('.tabpage').forEach(p=>p.classList.add('hidden'));
+  $('page-'+button.dataset.tab).classList.remove('hidden');
+  $('sectionTitle').textContent=titles[button.dataset.tab];
+}));
+
+function bindColor(name) {
+  $(name+'Picker').addEventListener('input',()=>$(name).value=$(name+'Picker').value);
+  $(name).addEventListener('input',()=>{if(/^#[0-9a-fA-F]{6}$/.test($(name).value))$(name+'Picker').value=$(name).value;});
+}
+['primary','accent','background','text','muted'].forEach(bindColor);
+
+function readTextSettings(){return {
+  eyebrow:$('eyebrow').value,
+  formMini:$('formMini').value,
+  titleLine1:$('titleLine1').value,
+  titleLine2:$('titleLine2').value,
+  titleAccent:$('titleAccent').value,
+  description:$('description').value,
+  formSubtitle:$('formSubtitle').value
+};}
+$('saveTexts').onclick=async()=>{
+  try{await update(ref(db,'website/settings'),{texts:readTextSettings()});status('connectionStatus','Text settings saved to Firebase.');}
+  catch(e){status('connectionStatus','Save failed: '+e.message,true);}
+};
+$('saveColors').onclick=async()=>{
+  const colors={};
+  for(const key of ['primary','accent','background','text','muted']){
+    const value=$(key).value.trim();
+    if(!/^#[0-9a-fA-F]{6}$/.test(value)){status('connectionStatus','Invalid HEX color: '+key,true);return;}
+    colors[key]=value;
+  }
+  try{await update(ref(db,'website/settings'),{colors});status('connectionStatus','Color settings saved to Firebase.');}
+  catch(e){status('connectionStatus','Save failed: '+e.message,true);}
+};
+$('saveFeatures').onclick=async()=>{
+  const features={accountSetup:$('featureAccountSetup').checked,accessKey:$('featureAccessKey').checked,guestAccess:$('featureGuestAccess').checked};
+  try{await update(ref(db,'website/settings'),{features});status('connectionStatus','Feature settings saved to Firebase.');}
+  catch(e){status('connectionStatus','Save failed: '+e.message,true);}
+};
+
+function refreshPreview(){
+  $('previewVersion').textContent='Version '+($('version').value.trim()||'—');
+  $('previewSize').textContent=$('sizeMb').value===''?'Update size will appear here':`Update size: ${$('sizeMb').value} MB`;
+  $('previewNotes').textContent=$('notes').value.trim()||'Your update notes preview.';
+}
+['version','sizeMb','notes'].forEach(id=>$(id).addEventListener('input',refreshPreview));
+$('publishRelease').onclick=async()=>{
+  const version=$('version').value.trim(), size=Number($('sizeMb').value), notes=$('notes').value.trim();
+  if(!version){status('releaseStatus','Enter a version number.',true);return;}
+  if($('sizeMb').value===''||!Number.isFinite(size)||size<0){status('releaseStatus','Enter the update size in MB.',true);return;}
+  try{
+    const release={version,sizeMb:size,notes,publishedAt:Date.now()};
+    await set(ref(db,'website/releases/current'),release);
+    await set(push(ref(db,'website/releases/history')),{...release});
+    $('dashVersion').textContent='v'+version;
+    $('dashSize').textContent=size+' MB (display size)';
+    status('releaseStatus','Release published successfully.');
+  }catch(e){status('releaseStatus','Release failed: '+e.message,true);}
+};
+
+onValue(ref(db,'website/releases/current'),snap=>{
+  const release=snap.val();
+  if(!release)return;
+  $('dashVersion').textContent='v'+(release.version||'—');
+  $('dashSize').textContent=(release.sizeMb??'—')+' MB (display size)';
+});
+onValue(ref(db,'website/releases/history'),snap=>{
+  const value=snap.val()||{};
+  const items=Object.values(value).sort((a,b)=>(b.publishedAt||0)-(a.publishedAt||0));
+  $('historyList').innerHTML='';
+  if(!items.length){$('historyList').textContent='No releases published yet.';return;}
+  items.forEach(item=>{
+    const row=document.createElement('div');
+    row.className='releasebox';
+    const title=document.createElement('strong');title.textContent='Version '+(item.version||'—');
+    const meta=document.createElement('p');meta.className='sub';meta.textContent=`${item.sizeMb??'—'} MB · ${item.notes||'No notes'}`;
+    row.append(title,meta);$('historyList').append(row);
+  });
+});
+onValue(ref(db,'website/settings'),snap=>{
+  const s=snap.val()||{};
+  const t=s.texts||{},c=s.colors||{},f=s.features||{};
+  Object.entries(t).forEach(([key,value])=>{const map={eyebrow:'eyebrow',formMini:'formMini',titleLine1:'titleLine1',titleLine2:'titleLine2',titleAccent:'titleAccent',description:'description',formSubtitle:'formSubtitle'};if(map[key]&&typeof value==='string')$(map[key]).value=value;});
+  Object.entries(c).forEach(([key,value])=>{if(['primary','accent','background','text','muted'].includes(key)&&/^#[0-9a-fA-F]{6}$/.test(value)){$(key).value=value;$(key+'Picker').value=value;}});
+  $('featureAccountSetup').checked=f.accountSetup!==false;
+  $('featureAccessKey').checked=f.accessKey!==false;
+  $('featureGuestAccess').checked=f.guestAccess!==false;
+});
+$('connectionStatus').textContent='Firebase connected. Waiting for database permissions…';
+</script>
+</body></html>
